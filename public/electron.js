@@ -24,8 +24,8 @@ app.on("ready", () => {
   // create main browser window
   mainWindow = new BrowserWindow({
     titleBarStyle: "hidden",
-    width: 1920,
-    height: 1080,
+    width: 1100,
+    height: 600,
     show: false, // don't show the main window
     // frame: false,
     webPreferences: {
