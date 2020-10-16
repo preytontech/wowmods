@@ -26,6 +26,8 @@ app.on("ready", () => {
     titleBarStyle: "hidden",
     width: 1100,
     height: 600,
+    minHeight: 520,
+    minWidth: 900,
     show: false, // don't show the main window
     // frame: false,
     webPreferences: {
