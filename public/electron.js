@@ -34,8 +34,8 @@ app.on("ready", () => {
   });
   // create a new `splash`-Window
   splash = new BrowserWindow({
-    width: 810,
-    height: 610,
+    width: 445,
+    height: 250,
     transparent: true,
     frame: false,
     alwaysOnTop: true,
