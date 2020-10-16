@@ -49,7 +49,6 @@ export default function Mtable() {
 
   return (
     <MaterialTable
-      style={{ height: "100vh" }}
       title="My Addons"
       columns={state.columns}
       data={state.data}

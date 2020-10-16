@@ -1,22 +1,18 @@
-import AppBar from "./layout/AppBar";
-import MainView from "./layout/MainView";
 import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
+import MyAddons from "../components/Mtable";
 
 const useStyles = makeStyles({
-  root: {
+  MainView: {
     width: "100%",
   },
 });
 
-function App() {
+export default function AppBar() {
   const classes = useStyles();
   return (
-    <div className={classes.root}>
-      <AppBar />
-      <MainView />
+    <div className={classes.MainView}>
+      <MyAddons />
     </div>
   );
 }
-
-export default App;
