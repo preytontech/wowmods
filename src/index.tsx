@@ -9,6 +9,7 @@ import customTheme from "./materialThemes/customTheme";
 
 import "fontsource-roboto";
 import { CssBaseline } from "@material-ui/core";
+import TopAppBar from "./layout/TopAppBar";
 
 ReactDOM.render(
   <React.StrictMode>
@@ -20,6 +21,17 @@ ReactDOM.render(
     </ThemeProvider>
   </React.StrictMode>,
   document.getElementById("root")
+);
+ReactDOM.render(
+  <React.StrictMode>
+    <CssBaseline />
+    <ThemeProvider theme={customTheme}>
+      <Provider store={store}>
+        <TopAppBar />
+      </Provider>
+    </ThemeProvider>
+  </React.StrictMode>,
+  document.getElementById("ApplicationBar")
 );
 
 // If you want your app to work offline and load faster, you can change
