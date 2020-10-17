@@ -15,12 +15,11 @@ require("@electron/remote/main").initialize();
 app.on("ready", () => {
   // create main browser window
   mainWindow = new BrowserWindow({
-    // titleBarStyle: "hidden",
     width: 1100,
     height: 600,
     minHeight: 520,
     minWidth: 900,
-    show: false, // don't show the main window
+    show: false,
     frame: false,
     webPreferences: {
       nodeIntegration: true,
@@ -34,26 +33,26 @@ app.on("ready", () => {
     transparent: true,
     frame: false,
     alwaysOnTop: true,
+    resizable: false,
   });
   splash.loadURL(`file://${__dirname}/splash.html`);
-  // and load the index.html of the app.
+
+  mainWindow.setMenu(null);
   mainWindow.loadURL(
     isDev
       ? "http://localhost:3000"
       : `file://${path.join(__dirname, "../build/index.html")}`
   );
-  mainWindow.setMenu(null);
 
   // if main window is ready to show, then destroy the splash window and show up the main window
   mainWindow.once("ready-to-show", () => {
+    // Open the DevTools.
+    if (isDev) {
+      mainWindow.webContents.openDevTools({ mode: "detach" });
+    }
     splash.destroy();
     mainWindow.show();
   });
-
-  // Open the DevTools.
-  if (isDev) {
-    mainWindow.webContents.openDevTools({ mode: "detach" });
-  }
 });
 
 // Quit when all windows are closed, except on macOS. There, it's common
