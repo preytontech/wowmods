@@ -65,6 +65,7 @@ export default function Mtable() {
       title=""
       columns={state.columns}
       data={state.data}
+      style={{ backgroundColor: "unset" }}
       options={{ emptyRowsWhenPaging: false, paging: false }}
     />
   );
