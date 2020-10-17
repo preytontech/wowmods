@@ -2,6 +2,8 @@ import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import MyAddons from "../components/Mtable";
 import { Button } from "@material-ui/core";
+import { getAllDirs } from "../services/native/win/fileReadWrite";
+import { readRegistry } from "../services/native/win/registryReader";
 
 const useStyles = makeStyles({
   MainView: {
@@ -13,6 +15,16 @@ const useStyles = makeStyles({
 });
 
 export default function AppBar() {
+  const handleSync = () => {
+    readRegistry("HKLM\\SOFTWARE")
+    .then((res)=> {
+      console.log(res)
+        getAllDirs("C:/ProgramData/Dell")
+        .then((res)=> {
+        console.log(res)
+      })
+    })
+  };
   const classes = useStyles();
   return (
     <div className={classes.MainView}>
@@ -29,7 +41,7 @@ export default function AppBar() {
         <Button variant="contained" color="primary" disabled={true}>
           Update All
         </Button>
-        <Button variant="contained" color="primary" disabled={true}>
+        <Button onClick={handleSync} variant="contained" color="primary">
           Sync
         </Button>
       </div>
