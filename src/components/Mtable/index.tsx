@@ -1,5 +1,6 @@
 import React from "react";
 import MaterialTable, { Column } from "material-table";
+import UpdateSourceSelector from "../UpdateSourceSelector";
 
 interface Row {
   name: string;
@@ -7,6 +8,7 @@ interface Row {
   addonVersion: string;
   gameVersion: string;
   author: string;
+  updateSource: string;
 }
 
 interface TableState {
@@ -28,6 +30,15 @@ export default function Mtable() {
         title: "Author",
         field: "author",
       },
+      {
+        title: "Update Source",
+        field: "updateSource",
+        render: (rowData) => (
+          <>
+            <UpdateSourceSelector data={rowData.updateSource} />
+          </>
+        ),
+      },
     ],
     data: [
       {
@@ -36,20 +47,22 @@ export default function Mtable() {
         addonVersion: "Altoholic 9.0 Stub.zip",
         gameVersion: "8.3.0",
         author: "thaokyaltoholic",
+        updateSource: "wowi",
       },
       {
-        name: "Altoholic",
+        name: "SpartanUI",
         status: "Up to Date",
-        addonVersion: "Altoholic 9.0 Stub.zip",
-        gameVersion: "8.3.0",
-        author: "thaokyaltoholic",
+        addonVersion: "SpartanUI-6.0.8.zip",
+        gameVersion: "9.0.1",
+        author: "wutname1",
+        updateSource: "curse",
       },
     ],
   });
 
   return (
     <MaterialTable
-      title="My Addons"
+      title=""
       columns={state.columns}
       data={state.data}
       options={{ emptyRowsWhenPaging: false, paging: false }}

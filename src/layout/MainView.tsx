@@ -4,6 +4,7 @@ import MyAddons from "../components/Mtable";
 import { Button } from "@material-ui/core";
 import { getAllDirs } from "../services/native/win/fileReadWrite";
 import { readRegistry } from "../services/native/win/registryReader";
+import { DeleteForever, Refresh, Sync, Update } from "@material-ui/icons";
 
 const useStyles = makeStyles({
   MainView: {
@@ -27,19 +28,33 @@ export default function AppBar() {
   return (
     <div className={classes.MainView}>
       <div className={classes.actionBar}>
-        <Button variant="contained" color="primary">
-          Refresh
+        <Button size="small" style={{ fontSize: ".8em" }} color="primary">
+          <Refresh /> Refresh
         </Button>
-        <Button variant="contained" color="primary">
+        <Button size="small" style={{ fontSize: ".8em" }} color="primary">
+          <Update />
           Update
         </Button>
-        <Button variant="contained" color="primary">
+        <Button size="small" style={{ fontSize: ".8em" }} color="primary">
+          <DeleteForever />
           Delete
         </Button>
-        <Button variant="contained" color="primary" disabled={true}>
+        <Button
+          size="small"
+          style={{ fontSize: ".8em" }}
+          color="primary"
+          disabled={true}
+        >
+          <Update />
           Update All
         </Button>
-        <Button onClick={handleSync} variant="contained" color="primary">
+        <Button
+          size="small"
+          style={{ fontSize: ".8em" }}
+          onClick={handleSync}
+          color="primary"
+        >
+          <Sync />
           Sync
         </Button>
       </div>
