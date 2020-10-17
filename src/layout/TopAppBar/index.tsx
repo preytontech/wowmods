@@ -1,11 +1,8 @@
 import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
-import AppBar from "@material-ui/core/AppBar";
-import Toolbar from "@material-ui/core/Toolbar";
-import IconButton from "@material-ui/core/IconButton";
 import MenuItem from "@material-ui/core/MenuItem";
 import Menu from "@material-ui/core/Menu";
-import { AccountCircle, Close, Minimize } from "@material-ui/icons";
+import { AccountCircle } from "@material-ui/icons";
 import { Button } from "@material-ui/core";
 
 const useStyles = makeStyles((theme) => ({
@@ -13,6 +10,7 @@ const useStyles = makeStyles((theme) => ({
     flexGrow: 1,
     display: "flex",
     color: "white",
+    height: "100%",
   },
   Toolbar: {
     minHeight: "fit-content",
@@ -40,7 +38,6 @@ const useStyles = makeStyles((theme) => ({
     [theme.breakpoints.up("md")]: {
       display: "flex",
     },
-    marginRight: "2em",
   },
   SystemButton: {
     borderRadius: 0,
@@ -54,19 +51,6 @@ export default function TopAppBar() {
   const classes = useStyles();
   const [anchorEl, setAnchorEl] = React.useState(null);
 
-  const CloseApp = () => {
-    window.close();
-  };
-
-  const MinimizeApp = (event) => {
-    const { BrowserWindow } = require("electron");
-    // Retrieve focused window
-    BrowserWindow.getFocusedWindow().minimize();
-    // window.minimizeWindow();
-  };
-
-  const isMenuOpen = Boolean(anchorEl);
-
   const handleProfileMenuOpen = (event) => {
     setAnchorEl(event.currentTarget);
   };
@@ -79,11 +63,17 @@ export default function TopAppBar() {
   const renderMenu = (
     <Menu
       anchorEl={anchorEl}
-      anchorOrigin={{ vertical: "top", horizontal: "right" }}
+      anchorOrigin={{
+        vertical: "bottom",
+        horizontal: "center",
+      }}
+      transformOrigin={{
+        vertical: "top",
+        horizontal: "center",
+      }}
       id={menuId}
       keepMounted
-      transformOrigin={{ vertical: "top", horizontal: "right" }}
-      open={isMenuOpen}
+      open={Boolean(anchorEl)}
       onClose={handleMenuClose}
     >
       <MenuItem onClick={handleMenuClose}>Settings</MenuItem>
@@ -99,18 +89,16 @@ export default function TopAppBar() {
       </Button>
 
       <div className={classes.grow} />
-      <div className={(classes.sectionAppbtns, "menubar-btn")}>
-        <IconButton
-          edge="end"
-          aria-label="account of current user"
+      <div className={classes.sectionAppbtns}>
+        <Button
           aria-controls={menuId}
           aria-haspopup="true"
           onClick={handleProfileMenuOpen}
           color="inherit"
-          className={classes.SystemButton}
+          className={"menubar-btn"}
         >
           <AccountCircle />
-        </IconButton>
+        </Button>
       </div>
       {renderMenu}
     </div>
