@@ -3,7 +3,39 @@ import { makeStyles } from "@material-ui/core/styles";
 import MenuItem from "@material-ui/core/MenuItem";
 import Menu from "@material-ui/core/Menu";
 import { AccountCircle } from "@material-ui/icons";
-import { Button } from "@material-ui/core";
+import {
+  Button,
+  createStyles,
+  FormControl,
+  InputBase,
+  Select,
+  Theme,
+  withStyles,
+} from "@material-ui/core";
+
+const BootstrapInput = withStyles((theme: Theme) =>
+  createStyles({
+    root: {
+      "label + &": {
+        marginTop: theme.spacing(3),
+      },
+    },
+    input: {
+      borderRadius: 5,
+      position: "relative",
+      backgroundColor: theme.palette.background.paper,
+      fontSize: 16,
+      padding: "10px 26px 10px 12px",
+      transition: theme.transitions.create(["border-color", "box-shadow"]),
+      width: "14em",
+      "&:hover": {
+        borderRadius: 4,
+        borderColor: "#80bdff",
+        boxShadow: "0 0 0 0.2rem rgba(0,123,255,.25)",
+      },
+    },
+  })
+)(InputBase);
 
 const useStyles = makeStyles((theme) => ({
   grow: {
@@ -33,17 +65,11 @@ const useStyles = makeStyles((theme) => ({
       display: "flex",
     },
   },
-  sectionAppbtns: {
-    display: "none",
-    [theme.breakpoints.up("md")]: {
-      display: "flex",
-    },
-  },
-  SystemButton: {
-    borderRadius: 0,
-  },
   AddonBtns: {
     marginRight: "2em",
+  },
+  margin: {
+    margin: theme.spacing(1),
   },
 }));
 
@@ -89,13 +115,32 @@ export default function TopAppBar() {
       </Button>
 
       <div className={classes.grow} />
-      <div className={classes.sectionAppbtns}>
+
+      <FormControl
+        style={{ flexDirection: "unset", paddingRight: "2.5em" }}
+        className={(classes.margin, "menubar-btn")}
+      >
+        <Select value={2} input={<BootstrapInput />}>
+          <MenuItem value={1}>
+            Beta - D:\Games\World of Warcraft\_beta_
+          </MenuItem>
+          <MenuItem value={2}>
+            Retail - D:\Games\World of Warcraft\_retail_
+          </MenuItem>
+          <MenuItem value={3}>
+            Classic - D:\Games\World of Warcraft\_classic_
+          </MenuItem>
+        </Select>
+      </FormControl>
+
+      <div>
         <Button
           aria-controls={menuId}
           aria-haspopup="true"
           onClick={handleProfileMenuOpen}
           color="inherit"
-          className={"menubar-btn"}
+          style={{ height: "100%", borderRadius: 0, minWidth: "40px" }}
+          className="menubar-btn"
         >
           <AccountCircle />
         </Button>
