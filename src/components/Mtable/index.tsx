@@ -52,7 +52,7 @@ export default function Mtable() {
       title="My Addons"
       columns={state.columns}
       data={state.data}
-      options={{ pageSize: 10 }}
+      options={{ emptyRowsWhenPaging: false, paging: false }}
     />
   );
 }

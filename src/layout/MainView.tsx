@@ -16,14 +16,12 @@ const useStyles = makeStyles({
 
 export default function AppBar() {
   const handleSync = () => {
-    readRegistry("HKLM\\SOFTWARE")
-    .then((res)=> {
-      console.log(res)
-        getAllDirs("C:/ProgramData/Dell")
-        .then((res)=> {
-        console.log(res)
-      })
-    })
+    readRegistry("HKLM\\SOFTWARE").then((res) => {
+      console.log(res);
+      getAllDirs("C:/ProgramData/Dell").then((res) => {
+        console.log(res);
+      });
+    });
   };
   const classes = useStyles();
   return (
@@ -45,7 +43,9 @@ export default function AppBar() {
           Sync
         </Button>
       </div>
-      <MyAddons />
+      <div style={{ maxHeight: "100vh", overflow: "auto" }}>
+        <MyAddons />
+      </div>
     </div>
   );
 }
