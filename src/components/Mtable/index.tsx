@@ -17,7 +17,7 @@ interface TableState {
 }
 
 export default function Mtable() {
-  const [state, setState] = React.useState<TableState>({
+  const state: TableState = {
     columns: [
       { title: "Addon", field: "name" },
       { title: "Status", field: "status" },
@@ -58,7 +58,7 @@ export default function Mtable() {
         updateSource: "curse",
       },
     ],
-  });
+  };
 
   return (
     <MaterialTable

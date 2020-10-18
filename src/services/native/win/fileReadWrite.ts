@@ -4,7 +4,10 @@ const { join } = window.require("path");
 export const getAllDirs = async (path) => {
   let dirs: any[] = [];
   for (const file of await readdir(path)) {
-    dirs = [...dirs, file];
+    if (file === "_retail_" || file === "_classic_") {
+      const f = path + "/" + file + "/Interface/AddOns";
+      dirs = [...dirs, f];
+    }
   }
   return dirs;
 };

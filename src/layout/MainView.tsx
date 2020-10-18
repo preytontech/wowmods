@@ -2,8 +2,6 @@ import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import MyAddons from "../components/Mtable";
 import { Button } from "@material-ui/core";
-import { getAllDirs } from "../services/native/win/fileReadWrite";
-import { readRegistry } from "../services/native/win/registryReader";
 import { DeleteForever, Refresh, Sync, Update } from "@material-ui/icons";
 
 const useStyles = makeStyles({
@@ -23,17 +21,15 @@ const useStyles = makeStyles({
   },
 });
 
-export default function AppBar() {
+export default function AppBar({
+  handleRefresh = undefined,
+  handleUpdate = undefined,
+  handleDelete = undefined,
+  handleUpdateAll = undefined,
+  handleSync = undefined,
+}) {
   const isPatreonSub = false;
 
-  const handleRefresh = () => {
-    readRegistry("HKLM\\SOFTWARE").then((res) => {
-      console.log(res);
-      getAllDirs("C:/ProgramData/Dell").then((res) => {
-        console.log(res);
-      });
-    });
-  };
   const classes = useStyles();
   return (
     <div className={classes.MainView}>
@@ -47,15 +43,26 @@ export default function AppBar() {
           >
             <Refresh /> Refresh
           </Button>
-          <Button size="small" style={{ fontSize: ".8em" }} color="primary">
+          <Button
+            onClick={handleUpdate}
+            size="small"
+            style={{ fontSize: ".8em" }}
+            color="primary"
+          >
             <Update />
             Update
           </Button>
-          <Button size="small" style={{ fontSize: ".8em" }} color="primary">
+          <Button
+            onClick={handleDelete}
+            size="small"
+            style={{ fontSize: ".8em" }}
+            color="primary"
+          >
             <DeleteForever />
             Delete
           </Button>
           <Button
+            onClick={handleUpdateAll}
             size="small"
             style={{ fontSize: ".8em" }}
             color="primary"
@@ -65,6 +72,7 @@ export default function AppBar() {
             Update All
           </Button>
           <Button
+            onClick={handleSync}
             size="small"
             style={{ fontSize: ".8em" }}
             color="primary"
