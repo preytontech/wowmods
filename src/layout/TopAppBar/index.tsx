@@ -38,6 +38,16 @@ const BootstrapInput = withStyles((theme: Theme) =>
 )(InputBase);
 
 const useStyles = makeStyles((theme) => ({
+  AppBar: {
+    flexGrow: 1,
+    display: "flex",
+    color: "white",
+    position: "absolute",
+    top: 0,
+    left: "60px",
+    right: "83px",
+    height: "60px",
+  },
   grow: {
     flexGrow: 1,
     display: "flex",
@@ -108,7 +118,7 @@ export default function TopAppBar() {
   );
 
   return (
-    <div className={classes.grow}>
+    <div className={classes.AppBar}>
       <Button className={(classes.AddonBtns, "menubar-btn")}>My Addons</Button>
       <Button className={(classes.AddonBtns, "menubar-btn")}>
         Get more addons

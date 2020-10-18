@@ -42,11 +42,11 @@ export default function Mtable() {
     ],
     data: [
       {
-        name: "Altoholic",
+        name: "Bartender4",
         status: "Up to Date",
-        addonVersion: "Altoholic 9.0 Stub.zip",
-        gameVersion: "8.3.0",
-        author: "thaokyaltoholic",
+        addonVersion: "Bartender4-4.10.2.zip",
+        gameVersion: "9.0.1",
+        author: "nevcairiel",
         updateSource: "wowi",
       },
       {

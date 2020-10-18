@@ -1,7 +1,10 @@
-import MainView from "./layout/MainView";
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect } from "react";
+//Views
+import MyAddons from "./layout/MyAddons";
+import TopAppBar from "./layout/TopAppBar";
+//React Stuff
 import { makeStyles } from "@material-ui/core/styles";
-//import TopAppBar from "./layout/TopAppBar";
 import { useDispatch, useSelector } from "react-redux";
 import { getDirInfo } from "./redux/actions/onLoadActions/getDirInfo";
 
@@ -30,8 +33,8 @@ function App() {
   const classes = useStyles();
   return (
     <div className={classes.root}>
-      {/* <TopAppBar /> top bar should be here along with close/minimize function*/}
-      <MainView />
+      <TopAppBar />
+      <MyAddons />
     </div>
   );
 }

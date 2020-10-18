@@ -21,8 +21,6 @@ ReactDOM.render(
   </React.StrictMode>,
   document.getElementById("root")
 );
-//cannot have 2 seperate renders in this file move minimize markup into react app
-//use window.require syntax to access electron eg: window.require("electron")
 
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.

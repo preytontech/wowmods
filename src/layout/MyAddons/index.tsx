@@ -1,6 +1,6 @@
 import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
-import MyAddons from "../components/Mtable";
+import MyAddonsTable from "../../components/Mtable";
 import { Button } from "@material-ui/core";
 import { DeleteForever, Refresh, Sync, Update } from "@material-ui/icons";
 
@@ -21,7 +21,7 @@ const useStyles = makeStyles({
   },
 });
 
-export default function AppBar({
+export default function MyAddons({
   handleRefresh = undefined,
   handleUpdate = undefined,
   handleDelete = undefined,
@@ -82,7 +82,7 @@ export default function AppBar({
             Sync
           </Button>
         </div>
-        <MyAddons />
+        <MyAddonsTable />
       </div>
     </div>
   );
