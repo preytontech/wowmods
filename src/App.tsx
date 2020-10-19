@@ -1,39 +1,35 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect } from "react";
 //Views
-import MyAddons from "./layout/MyAddons";
-import TopAppBar from "./layout/TopAppBar";
 //React Stuff
 import { makeStyles } from "@material-ui/core/styles";
 import { useDispatch, useSelector } from "react-redux";
 import { getDirInfo } from "./redux/actions/onLoadActions/getDirInfo";
+import MyAddons from "./components/layout/MyAddons";
+import TopAppbarWithData from "./containers/TopAppbarWithData";
 
 const useStyles = makeStyles({
   root: {
     width: "100%",
   },
 });
-type WowDirState = {
-  wowRootDir: string;
-  wowVerDirList: Array<string>;
-  loading: boolean;
-  WowDirReducer: WowDirState;
-};
+
 function App() {
-  const state = useSelector((state: WowDirState) => ({
-    ...state.WowDirReducer,
-  }));
+  const classes = useStyles();
   const dispatch = useDispatch();
+
+  //this function runs only on the first load and fetches rootpath from registry
+  //and uses that path to search for retail, classic and beta wow install dirs to
+  //the TopAppBar dropdown menu
   useEffect(() => {
     const regPath =
       "HKLM\\SOFTWARE\\WOW6432Node\\Blizzard Entertainment\\World of Warcraft";
     dispatch(getDirInfo(regPath));
   }, []);
-  console.log("loading:", state.loading, "state:", state);
-  const classes = useStyles();
+
   return (
     <div className={classes.root}>
-      <TopAppBar />
+      <TopAppbarWithData />
       <MyAddons />
     </div>
   );

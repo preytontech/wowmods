@@ -83,7 +83,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function TopAppBar() {
+export default function TopAppBar({ loading, dirList }) {
   const classes = useStyles();
   const [anchorEl, setAnchorEl] = React.useState(null);
 
@@ -130,16 +130,20 @@ export default function TopAppBar() {
         style={{ flexDirection: "unset", paddingRight: "2.5em" }}
         className={(classes.margin, "menubar-btn")}
       >
-        <Select value={2} input={<BootstrapInput />}>
-          <MenuItem value={1}>
-            Beta - D:\Games\World of Warcraft\_beta_
-          </MenuItem>
-          <MenuItem value={2}>
-            Retail - D:\Games\World of Warcraft\_retail_
-          </MenuItem>
-          <MenuItem value={3}>
-            Classic - D:\Games\World of Warcraft\_classic_
-          </MenuItem>
+        <Select value={1} input={<BootstrapInput />}>
+          {loading ? (
+            <MenuItem disabled value={1}>
+              Searcing...
+            </MenuItem>
+          ) : (
+            dirList.map((rec, i) => {
+              return (
+                <MenuItem key={i} value={i + 1}>
+                  {`${rec.name} - ${rec.path}`}
+                </MenuItem>
+              );
+            })
+          )}
         </Select>
       </FormControl>
 
