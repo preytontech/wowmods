@@ -1,6 +1,6 @@
 import { getAllDirs } from "../../../services/native/win/fileReadWrite";
 import { readRegistry } from "../../../services/native/win/registryReader";
-import { GET_DIRPATHS, GET_ROOTPATH, SET_LOADING } from "./constants";
+import { CATCH_ERROR, GET_DIRPATHS, GET_ROOTPATH, SET_LOADING } from "./constants";
 
 export const getDirInfo = (key: string) => {
   return (dispatch: any) => {
@@ -30,14 +30,21 @@ export const getDirInfo = (key: string) => {
             })
             .catch((err) => {
               console.log(err);
+              dispatch({type:CATCH_ERROR, payload:"No wow dir found..."})
+              
+      dispatch({ type: SET_LOADING, payload: false });
             });
         }
       })
       .catch((err) => {
         console.log(err);
+        dispatch({type:CATCH_ERROR, payload:"No wow dir found..."})
+        
+      dispatch({ type: SET_LOADING, payload: false });
       });
   };
   /* getAllDirs("C:/ProgramData/Dell").then((res) => {
         console.log(res);
       }); */
+  
 };

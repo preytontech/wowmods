@@ -1,42 +1,12 @@
-import React, { EventHandler, SyntheticEvent } from "react";
+import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import MenuItem from "@material-ui/core/MenuItem";
 import Menu from "@material-ui/core/Menu";
 import { AccountCircle } from "@material-ui/icons";
-import {
-  Button,
-  createStyles,
-  FormControl,
-  InputBase,
-  Select,
-  Theme,
-  withStyles,
-} from "@material-ui/core";
+import { Button } from "@material-ui/core";
 import { Link } from "react-router-dom";
-
-const BootstrapInput = withStyles((theme: Theme) =>
-  createStyles({
-    root: {
-      "label + &": {
-        marginTop: theme.spacing(3),
-      },
-    },
-    input: {
-      borderRadius: 5,
-      position: "relative",
-      backgroundColor: theme.palette.background.paper,
-      fontSize: 16,
-      padding: "10px 26px 10px 12px",
-      transition: theme.transitions.create(["border-color", "box-shadow"]),
-      width: "14em",
-      "&:hover": {
-        borderRadius: 4,
-        borderColor: "#80bdff",
-        boxShadow: "0 0 0 0.2rem rgba(0,123,255,.25)",
-      },
-    },
-  })
-)(InputBase);
+import DropDown from "./DropDown";
+import DropDownWithData from "../../../containers/DropDownWithData";
 
 const useStyles = makeStyles((theme) => ({
   AppBar: {
@@ -88,7 +58,7 @@ interface Props {
   dirList: Array<object>;
 }
 
-export default function TopAppBar({ loading, dirList }: Props) {
+export default function TopAppBar() {
   const classes = useStyles();
   const [anchorEl, setAnchorEl] = React.useState<any>(null);
 
@@ -140,27 +110,7 @@ export default function TopAppBar({ loading, dirList }: Props) {
       </Button>
 
       <div className={classes.grow} />
-
-      <FormControl
-        style={{ flexDirection: "unset", paddingRight: "2.5em" }}
-        className={(classes.margin, "menubar-btn")}
-      >
-        <Select value={1} input={<BootstrapInput />}>
-          {loading ? (
-            <MenuItem disabled value={1}>
-              Searcing...
-            </MenuItem>
-          ) : (
-            dirList.map((rec: any, i) => {
-              return (
-                <MenuItem key={i} value={i + 1}>
-                  {`${rec.name} - ${rec.path}`}
-                </MenuItem>
-              );
-            })
-          )}
-        </Select>
-      </FormControl>
+      <DropDownWithData />
 
       <div>
         <Button
