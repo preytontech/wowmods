@@ -7,6 +7,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { getDirInfo } from "./redux/actions/onLoadActions/getDirInfo";
 import MyAddons from "./components/layout/MyAddons";
 import TopAppbarWithData from "./containers/TopAppbarWithData";
+import { BrowserRouter as Router, Route } from "react-router-dom";
+import GetMoreAddons from "./components/layout/GetMoreAddons";
 
 const useStyles = makeStyles({
   root: {
@@ -29,8 +31,11 @@ function App() {
 
   return (
     <div className={classes.root}>
-      <TopAppbarWithData />
-      <MyAddons />
+      <Router basename="/">
+        <TopAppbarWithData />
+        <Route exact path="/" component={MyAddons} />
+        <Route exact path="/getmoreaddons" component={GetMoreAddons} />
+      </Router>
     </div>
   );
 }

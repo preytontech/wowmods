@@ -12,6 +12,7 @@ import {
   Theme,
   withStyles,
 } from "@material-ui/core";
+import { Link } from "react-router-dom";
 
 const BootstrapInput = withStyles((theme: Theme) =>
   createStyles({
@@ -119,8 +120,18 @@ export default function TopAppBar({ loading, dirList }) {
 
   return (
     <div className={classes.AppBar}>
-      <Button className={(classes.AddonBtns, "menubar-btn")}>My Addons</Button>
-      <Button className={(classes.AddonBtns, "menubar-btn")}>
+      <Button
+        component={Link}
+        to="/"
+        className={(classes.AddonBtns, "menubar-btn")}
+      >
+        My Addons
+      </Button>
+      <Button
+        component={Link}
+        to="/getmoreaddons"
+        className={(classes.AddonBtns, "menubar-btn")}
+      >
         Get more addons
       </Button>
 
