@@ -4,7 +4,7 @@ import TopAppBar from "../components/layout/TopAppBar";
 
 type WowDirState = {
   wowRootDir: string;
-  wowVerDirList: Array<string>;
+  wowVerDirList: Array<object>;
   loading: boolean;
   WowDirReducer: WowDirState;
 };

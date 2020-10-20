@@ -1,4 +1,4 @@
-import React from "react";
+import React, { EventHandler, SyntheticEvent } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import MenuItem from "@material-ui/core/MenuItem";
 import Menu from "@material-ui/core/Menu";
@@ -83,12 +83,16 @@ const useStyles = makeStyles((theme) => ({
     margin: theme.spacing(1),
   },
 }));
+interface Props {
+  loading: boolean;
+  dirList: Array<object>;
+}
 
-export default function TopAppBar({ loading, dirList }) {
+export default function TopAppBar({ loading, dirList }: Props) {
   const classes = useStyles();
-  const [anchorEl, setAnchorEl] = React.useState(null);
+  const [anchorEl, setAnchorEl] = React.useState<any>(null);
 
-  const handleProfileMenuOpen = (event) => {
+  const handleProfileMenuOpen = (event: React.MouseEvent): void => {
     setAnchorEl(event.currentTarget);
   };
 
@@ -147,7 +151,7 @@ export default function TopAppBar({ loading, dirList }) {
               Searcing...
             </MenuItem>
           ) : (
-            dirList.map((rec, i) => {
+            dirList.map((rec: any, i) => {
               return (
                 <MenuItem key={i} value={i + 1}>
                   {`${rec.name} - ${rec.path}`}

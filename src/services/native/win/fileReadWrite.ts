@@ -3,12 +3,12 @@ const { statSync, existsSync, readdirSync } = window.require("fs");
 const execSync = window.require("child_process").execSync;
 const { join } = window.require("path");
 
-export const getAllDirs = async (path) => {
+export const getAllDirs = async (path:string) => {
   let dirs: any[] = [];
   for (const file of await readdir(path)) {
     let cleanName = file.replace(/_/g, "");
     cleanName = cleanName.charAt(0).toUpperCase() + cleanName.slice(1);
-    const f = path + "/" + file;
+    const f:string = path + "/" + file;
 
     const dirInfo = statSync(f);
     //Currently every version of the game has a BlizzardError.exe in the folder so check to see if the folder is a game folder
@@ -48,7 +48,7 @@ export const getAllDirs = async (path) => {
   }
   return dirs;
 };
-const findWowExe = (f) => {
+const findWowExe = (f:string) => {
   let files = readdirSync(f);
   for (let i = 0; i < files.length; i++) {
     if (
@@ -61,7 +61,7 @@ const findWowExe = (f) => {
   return false;
 };
 
-const getExeVersion = (path) => {
+const getExeVersion = (path:string) => {
   let app = `wmic datafile where name="${path}" get version /value`;
   let child = execSync(app).toString();
   if (child) {
@@ -70,7 +70,7 @@ const getExeVersion = (path) => {
   return child;
 };
 const deleteFolderRecursive = async (path: string) => {
-  rmdir(path, { recursive: true }, (err) => {
+  rmdir(path, { recursive: true }, (err:string) => {
     if (err) {
       console.error(err);
       return false;
