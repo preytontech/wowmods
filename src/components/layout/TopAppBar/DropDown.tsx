@@ -1,4 +1,5 @@
 import {
+  Button,
   createStyles,
   FormControl,
   InputBase,
@@ -37,13 +38,16 @@ const useStyles = makeStyles((theme) => ({
   margin: {
     margin: theme.spacing(1),
   },
+  lookup: {
+    marginLeft: 50,
+  },
 }));
 interface Props {
   loading: boolean;
   dirList: Array<object>;
   error: string;
 }
-const dropDownRender = ({ loading, dirList, error }: Props) => {
+const dropDownRender = ({ loading, dirList, error }: Props, classes) => {
   if (loading)
     return (
       <MenuItem disabled value={1}>
@@ -52,8 +56,11 @@ const dropDownRender = ({ loading, dirList, error }: Props) => {
     );
   if (error)
     return (
-      <MenuItem disabled value={1}>
+      <MenuItem value={1}>
         {error}
+        <Button className={classes.lookup} color="primary" size="small">
+          lookup
+        </Button>
       </MenuItem>
     ); //error markup
 
@@ -72,8 +79,8 @@ const DropDown = (Props) => {
       style={{ flexDirection: "unset", paddingRight: "2.5em" }}
       className={(classes.margin, "menubar-btn")}
     >
-      <Select value={1} input={<BootstrapInput />}>
-        {dropDownRender(Props)}
+      <Select disabled value={1} input={<BootstrapInput />}>
+        {dropDownRender(Props, classes)}
       </Select>
     </FormControl>
   );

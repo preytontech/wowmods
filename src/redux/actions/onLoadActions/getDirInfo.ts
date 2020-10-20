@@ -30,7 +30,7 @@ export const getDirInfo = (key: string) => {
             })
             .catch((err) => {
               console.log(err);
-              dispatch({type:CATCH_ERROR, payload:"No wow dir found..."})
+              dispatch({type:CATCH_ERROR, payload:"No dir found..."})
               
       dispatch({ type: SET_LOADING, payload: false });
             });
@@ -38,7 +38,7 @@ export const getDirInfo = (key: string) => {
       })
       .catch((err) => {
         console.log(err);
-        dispatch({type:CATCH_ERROR, payload:"No wow dir found..."})
+        dispatch({type:CATCH_ERROR, payload:"No dir found..."})
         
       dispatch({ type: SET_LOADING, payload: false });
       });
