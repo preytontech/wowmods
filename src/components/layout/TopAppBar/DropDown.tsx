@@ -46,8 +46,12 @@ interface Props {
   loading: boolean;
   dirList: Array<object>;
   error: string;
+  handleAddDir: (event: React.MouseEvent<HTMLButtonElement>) => void;
 }
-const dropDownRender = ({ loading, dirList, error }: Props, classes) => {
+const dropDownRender = (
+  { loading, dirList, error, handleAddDir }: Props,
+  classes
+) => {
   if (loading)
     return (
       <MenuItem disabled value={1}>
@@ -58,13 +62,18 @@ const dropDownRender = ({ loading, dirList, error }: Props, classes) => {
     return (
       <MenuItem value={1}>
         {error}
-        <Button className={classes.lookup} color="primary" size="small">
+        <Button
+          onClick={handleAddDir}
+          className={classes.lookup}
+          color="primary"
+          size="small"
+        >
           lookup
         </Button>
       </MenuItem>
     ); //error markup
 
-  dirList.map((rec: any, i) => {
+  return dirList.map((rec: any, i) => {
     return (
       <MenuItem key={i} value={i + 1}>
         {`${rec.name} - ${rec.path}`}
