@@ -54,8 +54,8 @@
     "package": "react-scripts build && electron-forge package",
     "make": "react-scripts build && electron-forge make",
     "postinstall": "electron-builder install-app-deps",
-    "build": "electron-builder --windows",
-    "release": "electron-builder --windows --publish always"
+    "build": "react-scripts build && electron-builder --windows",
+    "release": "react-scripts build && electron-builder --windows --publish always"
   },
   "eslintConfig": {
     "extends": "react-app"
