@@ -9,7 +9,6 @@ export const getAllDirs = async (path:string) => {
     let cleanName = file.replace(/_/g, "");
     cleanName = cleanName.charAt(0).toUpperCase() + cleanName.slice(1);
     const f:string = path + "/" + file;
-
     const dirInfo = statSync(f);
     //Currently every version of the game has a BlizzardError.exe in the folder so check to see if the folder is a game folder
     //We should run a wildcard check for wow*.exe//

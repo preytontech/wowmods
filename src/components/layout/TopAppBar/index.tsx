@@ -53,10 +53,6 @@ const useStyles = makeStyles((theme) => ({
     margin: theme.spacing(1),
   },
 }));
-interface Props {
-  loading: boolean;
-  dirList: Array<object>;
-}
 
 export default function TopAppBar() {
   const classes = useStyles();
