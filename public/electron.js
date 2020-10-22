@@ -34,6 +34,7 @@ app.on("ready", () => {
     frame: false,
     alwaysOnTop: true,
     resizable: false,
+    enableRemoteModule: true
   });
   splash.loadURL(`file://${__dirname}/splash.html`);
 
