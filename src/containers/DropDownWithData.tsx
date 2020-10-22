@@ -4,12 +4,14 @@ import DropDown from "../components/layout/TopAppBar/DropDown";
 import {
   getDirInfo,
   lookupRootDir,
+  setSelectedDir,
 } from "../redux/actions/onLoadActions/getDirInfo";
 const { dialog } = window.require("electron").remote;
 
 type WowDirState = {
   wowRootDir: string;
   wowVerDirList: Array<object>;
+  wowSelectedDir: string;
   loading: boolean;
   error: string;
   WowDirReducer: WowDirState;
@@ -25,7 +27,7 @@ const DropDownWithData = () => {
       "HKLM\\SOFTWARE\\WOW6432Node\\Blizzard Entertainment\\World of Warcraft";
     dispatch(getDirInfo(regPath));
   }, []);
-  const { loading, wowVerDirList, error } = useSelector(
+  const { loading, wowVerDirList, error, wowSelectedDir } = useSelector(
     (state: WowDirState) => ({
       ...state.WowDirReducer,
     })
@@ -38,6 +40,11 @@ const DropDownWithData = () => {
     dispatch(lookupRootDir(path.filePaths[0].toString()));
   };
 
+  const handleSelectChange = (event: React.ChangeEvent<{ value: string }>) => {
+    const val = event.target.value;
+    dispatch(setSelectedDir(val));
+  };
+
   return (
     <>
       <DropDown
@@ -45,6 +52,8 @@ const DropDownWithData = () => {
         dirList={wowVerDirList}
         error={error}
         handleAddDir={handleAddDir}
+        handleSelectChange={handleSelectChange}
+        selectValue={wowSelectedDir}
       />
     </>
   );

@@ -1,6 +1,6 @@
 import { getAllDirs } from "../../../services/native/win/fileReadWrite";
 import { readRegistry } from "../../../services/native/win/registryReader";
-import { CATCH_ERROR, GET_DIRPATHS, GET_ROOTPATH, SET_LOADING } from "./constants";
+import { CATCH_ERROR, GET_DIRPATHS, GET_ROOTPATH, SET_LOADING, SET_SELECTED } from "./constants";
 
 export const getDirInfo = (key: string) => {
   return (dispatch: any) => {
@@ -56,9 +56,6 @@ export const lookupRootDir = (path: string) => {
     dispatch({ type: GET_ROOTPATH, payload: path });
     getAllDirs(path)
       .then((res) => {
-        console.log(res)
-        dispatch({ type: GET_DIRPATHS, payload: res });
-        dispatch({ type: SET_LOADING, payload: false });
         dispatch({type:CATCH_ERROR, payload:""})
         dispatch({ type: SET_LOADING, payload: false });
         dispatch({ type: GET_DIRPATHS, payload: res });
@@ -70,4 +67,11 @@ export const lookupRootDir = (path: string) => {
         dispatch({ type: SET_LOADING, payload: false });
       });
     }
+};
+
+export const setSelectedDir = (val: string) => {
+  return (dispatch: any) => {
+    //TODO fetch from local cache if available
+    dispatch({ type: SET_SELECTED, payload: val });
+  }
 };

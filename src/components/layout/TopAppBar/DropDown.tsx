@@ -47,6 +47,8 @@ interface Props {
   dirList: Array<object>;
   error: string;
   handleAddDir: (event: React.MouseEvent<HTMLButtonElement>) => void;
+  handleSelectChange: (event: React.ChangeEvent<HTMLSelectElement>) => void;
+  selectInput: string;
 }
 const dropDownRender = (
   { loading, dirList, error, handleAddDir }: Props,
@@ -81,8 +83,9 @@ const dropDownRender = (
     );
   });
 };
+
 const DropDown = (Props) => {
-  const { error } = Props;
+  const { error, handleSelectChange, selectValue } = Props;
   const classes = useStyles();
   return (
     <FormControl
