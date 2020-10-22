@@ -24,7 +24,7 @@ const DropDownWithData = () => {
     const regPath =
       "HKLM\\SOFTWARE\\WOW6432Node\\Blizzard Entertainment\\World of Warcraft";
     dispatch(getDirInfo(regPath));
-  }, []);
+  }, [dispatch]);
   const { loading, wowVerDirList, error } = useSelector(
     (state: WowDirState) => ({
       ...state.WowDirReducer,
