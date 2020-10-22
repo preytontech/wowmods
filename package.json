@@ -4,7 +4,7 @@
   "description": "WoW Mod updater & installer",
   "version": "0.1.0",
   "main": "public/electron.js",
-  "homepage": "https://wowmods.app/",
+  "homepage": "./",
   "private": true,
   "license": "MPL-2.0",
   "build": {
