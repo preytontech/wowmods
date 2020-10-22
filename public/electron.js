@@ -2,6 +2,7 @@ const path = require("path");
 
 const { app, BrowserWindow } = require("electron");
 const isDev = require("electron-is-dev");
+const { autoUpdater } = require("electron-updater");
 
 // Handle creating/removing shortcuts on Windows when installing/uninstalling
 if (require("electron-squirrel-startup")) {
@@ -34,10 +35,16 @@ app.on("ready", () => {
     frame: false,
     alwaysOnTop: true,
     resizable: false,
-    enableRemoteModule: true
+    enableRemoteModule: true,
   });
   splash.loadURL(`file://${__dirname}/splash.html`);
 
+  //Check for updates, download and install in BG for next launch
+  autoUpdater.checkForUpdatesAndNotify();
+  //TODO: Check for updates and start install. Need to use the commands below to monitor the progress & display status on splash
+  //autoUpdater.checkForUpdates();
+
+  //Setup Main Window
   mainWindow.setMenu(null);
   mainWindow.loadURL(
     isDev
@@ -64,3 +71,35 @@ app.on("window-all-closed", () => {
     app.quit();
   }
 });
+
+// function sendStatusToWindow(text) {
+//   log.info(text);
+//   win.webContents.send("message", text);
+// }
+// autoUpdater.on("checking-for-update", () => {
+//   sendStatusToWindow("Checking for update...");
+// });
+// autoUpdater.on("update-available", (info) => {
+//   sendStatusToWindow("Update available.");
+// });
+// autoUpdater.on("update-not-available", (info) => {
+//   sendStatusToWindow("Update not available.");
+// });
+// autoUpdater.on("error", (err) => {
+//   sendStatusToWindow("Error in auto-updater. " + err);
+// });
+// autoUpdater.on("download-progress", (progressObj) => {
+//   let log_message = "Download speed: " + progressObj.bytesPerSecond;
+//   log_message = log_message + " - Downloaded " + progressObj.percent + "%";
+//   log_message =
+//     log_message +
+//     " (" +
+//     progressObj.transferred +
+//     "/" +
+//     progressObj.total +
+//     ")";
+//   sendStatusToWindow(log_message);
+// });
+// autoUpdater.on("update-downloaded", (info) => {
+//   sendStatusToWindow("Update downloaded");
+// });
