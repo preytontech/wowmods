@@ -60,6 +60,8 @@ export const lookupRootDir = (path: string) => {
         dispatch({ type: GET_DIRPATHS, payload: res });
         dispatch({ type: SET_LOADING, payload: false });
         dispatch({type:CATCH_ERROR, payload:""})
+        dispatch({ type: SET_LOADING, payload: false });
+        dispatch({ type: GET_DIRPATHS, payload: res });
       })
       .catch((err) => {
         console.log(err);

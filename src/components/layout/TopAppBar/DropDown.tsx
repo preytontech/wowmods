@@ -82,13 +82,19 @@ const dropDownRender = (
   });
 };
 const DropDown = (Props) => {
+  const { error } = Props;
   const classes = useStyles();
   return (
     <FormControl
       style={{ flexDirection: "unset", paddingRight: "2.5em" }}
       className={(classes.margin, "menubar-btn")}
     >
-      <Select disabled value={1} input={<BootstrapInput />}>
+      <Select
+        disabled={error ? true : false}
+        onChange={handleSelectChange}
+        value={selectValue}
+        input={<BootstrapInput />}
+      >
         {dropDownRender(Props, classes)}
       </Select>
     </FormControl>
