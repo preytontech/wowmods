@@ -1,7 +1,11 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import DropDown from "../components/layout/TopAppBar/DropDown";
-import { getDirInfo } from "../redux/actions/onLoadActions/getDirInfo";
+import {
+  getDirInfo,
+  lookupRootDir,
+} from "../redux/actions/onLoadActions/getDirInfo";
+const { dialog } = window.require("electron").remote;
 
 type WowDirState = {
   wowRootDir: string;
@@ -27,9 +31,21 @@ const DropDownWithData = () => {
     })
   );
 
+  const handleAddDir = async () => {
+    var path = await dialog.showOpenDialog({
+      properties: ["openDirectory"],
+    });
+    dispatch(lookupRootDir(path.filePaths[0].toString()));
+  };
+
   return (
     <>
-      <DropDown loading={loading} dirList={wowVerDirList} error={error} />
+      <DropDown
+        loading={loading}
+        dirList={wowVerDirList}
+        error={error}
+        handleAddDir={handleAddDir}
+      />
     </>
   );
 };
