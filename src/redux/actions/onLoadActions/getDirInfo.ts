@@ -4,8 +4,6 @@ import { CATCH_ERROR, GET_DIRPATHS, GET_ROOTPATH, SET_LOADING } from "./constant
 
 export const getDirInfo = (key: string) => {
   return (dispatch: any) => {
-    try {
-    } catch (ex) {}
     //TODO fetch from local cache if available
     dispatch({ type: SET_LOADING, payload: true });
     readRegistry(key)
@@ -47,4 +45,27 @@ export const getDirInfo = (key: string) => {
         console.log(res);
       }); */
   
+};
+export const lookupRootDir = (path: string) => {
+  path = path.split("\\").join("/")
+  return (dispatch: any) => {
+    //TODO fetch from local cache if available
+    dispatch({ type: SET_LOADING, payload: true });
+    
+    //TODO: write to local cache
+    dispatch({ type: GET_ROOTPATH, payload: path });
+    getAllDirs(path)
+      .then((res) => {
+        console.log(res)
+        dispatch({ type: GET_DIRPATHS, payload: res });
+        dispatch({ type: SET_LOADING, payload: false });
+        dispatch({type:CATCH_ERROR, payload:""})
+      })
+      .catch((err) => {
+        console.log(err);
+        dispatch({type:CATCH_ERROR, payload:"No dir found..."})
+        
+        dispatch({ type: SET_LOADING, payload: false });
+      });
+    }
 };
