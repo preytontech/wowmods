@@ -15,6 +15,18 @@
     },
     "dmg": {
       "icon": false
+    },
+    "win": {
+      "requestedExecutionLevel": "requireAdministrator",
+      "icon": "build/icon.ico",
+      "target": [
+        {
+          "target": "nsis",
+          "arch": [
+            "x64"
+          ]
+        }
+      ]
     }
   },
   "dependencies": {
