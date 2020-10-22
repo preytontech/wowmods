@@ -36,11 +36,14 @@
     "dev": "concurrently \"SET BROWSER=none&&npm start\" \"npm:electron\"",
     "electron": "wait-on tcp:3000 && electron-forge start",
     "start": "react-scripts start",
-    "build": "react-scripts build",
+    "reactbuild": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "package": "react-scripts build && electron-forge package",
-    "make": "react-scripts build && electron-forge make"
+    "make": "react-scripts build && electron-forge make",
+    "postinstall": "electron-builder install-app-deps",
+    "build": "electron-builder --mac --windows --linux",
+    "release": "electron-builder --mac --windows --linux --publish always"
   },
   "eslintConfig": {
     "extends": "react-app"
