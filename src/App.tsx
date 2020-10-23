@@ -1,12 +1,10 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import React, { useEffect } from "react";
+import React from "react";
 //Views
 //React Stuff
 import { makeStyles } from "@material-ui/core/styles";
-import { useDispatch, useSelector } from "react-redux";
-import { getDirInfo } from "./redux/actions/onLoadActions/getDirInfo";
 import MyAddons from "./components/layout/MyAddons";
-import { BrowserRouter as Router, Route } from "react-router-dom";
+import { HashRouter as Router, Route } from "react-router-dom";
 import GetMoreAddons from "./components/layout/GetMoreAddons";
 import TopAppBar from "./components/layout/TopAppBar";
 
