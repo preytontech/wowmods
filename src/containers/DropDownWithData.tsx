@@ -5,7 +5,7 @@ import {
   getDirInfo,
   lookupRootDir,
   setSelectedDir,
-} from "../redux/actions/onLoadActions/getDirInfo";
+} from "../redux/actions/dirDropdownActions";
 const { dialog } = window.require("electron").remote;
 
 type WowDirState = {
