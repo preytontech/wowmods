@@ -21,10 +21,13 @@ const DropDownWithData = () => {
   //and uses that path to search for retail, classic and beta wow install dirs to
   //the TopAppBar dropdown menu
   useEffect(() => {
-    const regPath =
-      "HKLM\\SOFTWARE\\WOW6432Node\\Blizzard Entertainment\\World of Warcraft";
-    dispatch(getDirInfo(regPath));
+    if (wowVerDirList.length === 0) {
+      const regPath =
+        "HKLM\\SOFTWARE\\WOW6432Node\\Blizzard Entertainment\\World of Warcraft";
+      dispatch(getDirInfo(regPath));
+    }
   }, [dispatch]);
+
   const { loading, wowVerDirList, error, wowSelectedDir } = useSelector(
     (state: WowDirState) => ({
       ...state.WowDirReducer,
