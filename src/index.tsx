@@ -11,14 +11,14 @@ import "fontsource-roboto";
 import { CssBaseline } from "@material-ui/core";
 const store = configureStore();
 ReactDOM.render(
-  <React.StrictMode>
+  <>
     <CssBaseline />
     <ThemeProvider theme={customTheme}>
       <Provider store={store}>
         <App />
       </Provider>
     </ThemeProvider>
-  </React.StrictMode>,
+  </>,
   document.getElementById("root")
 );
 
