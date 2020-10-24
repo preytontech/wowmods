@@ -3,10 +3,8 @@ import { useDispatch, useSelector } from "react-redux";
 import DropDown from "../components/layout/TopAppBar/DropDown";
 import {
   getDirInfo,
-  lookupRootDir,
   setSelectedDir,
 } from "../redux/actions/dirDropdownActions";
-const { dialog } = window.require("electron").remote;
 
 type WowDirState = {
   wowRootDir: string;
@@ -33,13 +31,6 @@ const DropDownWithData = () => {
     })
   );
 
-  const handleAddDir = async () => {
-    var path = await dialog.showOpenDialog({
-      properties: ["openDirectory"],
-    });
-    dispatch(lookupRootDir(path.filePaths[0].toString()));
-  };
-
   const handleSelectChange = (event: React.ChangeEvent<{ value: string }>) => {
     const val = event.target.value;
     dispatch(setSelectedDir(val));
@@ -51,7 +42,6 @@ const DropDownWithData = () => {
         loading={loading}
         dirList={wowVerDirList}
         error={error}
-        handleAddDir={handleAddDir}
         handleSelectChange={handleSelectChange}
         selectValue={wowSelectedDir}
       />

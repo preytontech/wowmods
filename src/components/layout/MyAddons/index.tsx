@@ -1,6 +1,6 @@
 import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
-import MyAddonsTable from "../../Mtable";
+import MyAddonsTable from "../../AddonTable/Index";
 import { Button } from "@material-ui/core";
 import { DeleteForever, Refresh, Sync, Update } from "@material-ui/icons";
 

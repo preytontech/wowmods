@@ -44,18 +44,28 @@ const useStyles = makeStyles((theme) => ({
 export default function UpdateSourceSelector(props) {
   const classes = useStyles();
 
-  return (
-    <FormControl
-      style={{ flexDirection: "unset", paddingRight: "2.5em" }}
-      className={(classes.margin, "menubar-btn")}
-    >
-      <Select value={props.data} input={<BootstrapInput />}>
-        <MenuItem value="wowi">WoWInterface</MenuItem>
-        <MenuItem value="curse">Curseforge</MenuItem>
-        <MenuItem value="git">GitHub</MenuItem>
-      </Select>
-    </FormControl>
-  );
+  if (props.data) {
+    return (
+      <FormControl
+        style={{ flexDirection: "unset", paddingRight: "2.5em" }}
+        className={(classes.margin, "menubar-btn")}
+      >
+        <Select value={props.data} input={<BootstrapInput />}>
+          <MenuItem id="wowi" value="wowi">
+            WoWInterface
+          </MenuItem>
+          <MenuItem id="curse" value="curse">
+            Curseforge
+          </MenuItem>
+          <MenuItem id="git" value="git">
+            GitHub
+          </MenuItem>
+        </Select>
+      </FormControl>
+    );
+  } else {
+    return <></>;
+  }
 }
 
 UpdateSourceSelector.propTypes = {

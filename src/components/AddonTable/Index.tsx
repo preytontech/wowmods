@@ -1,6 +1,6 @@
 import React from "react";
 import MaterialTable, { Column } from "material-table";
-import UpdateSourceSelector from "../UpdateSourceSelector";
+import UpdateSourceSelector from "./UpdateSourceSelector";
 
 interface Row {
   name: string;

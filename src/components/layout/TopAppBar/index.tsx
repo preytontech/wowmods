@@ -5,7 +5,6 @@ import Menu from "@material-ui/core/Menu";
 import { AccountCircle } from "@material-ui/icons";
 import { Button } from "@material-ui/core";
 import { Link } from "react-router-dom";
-import DropDown from "./DropDown";
 import DropDownWithData from "../../../containers/DropDownWithData";
 
 const useStyles = makeStyles((theme) => ({
@@ -70,10 +69,10 @@ export default function TopAppBar() {
   const renderMenu = (
     <Menu
       anchorEl={anchorEl}
-      anchorOrigin={{
-        vertical: "bottom",
-        horizontal: "center",
-      }}
+      // anchorOrigin={{
+      //   vertical: "bottom",
+      //   horizontal: "center",
+      // }}
       transformOrigin={{
         vertical: "top",
         horizontal: "center",
@@ -83,8 +82,12 @@ export default function TopAppBar() {
       open={Boolean(anchorEl)}
       onClose={handleMenuClose}
     >
-      <MenuItem onClick={handleMenuClose}>Settings</MenuItem>
-      <MenuItem onClick={handleMenuClose}>My account</MenuItem>
+      <MenuItem component={Link} to="/userSettings">
+        Settings
+      </MenuItem>
+      <MenuItem component={Link} to="/userAccount">
+        My account
+      </MenuItem>
     </Menu>
   );
 
@@ -92,14 +95,14 @@ export default function TopAppBar() {
     <div className={classes.AppBar}>
       <Button
         component={Link}
-        to="/"
+        to="/MyAddons"
         className={(classes.AddonBtns, "menubar-btn")}
       >
         My Addons
       </Button>
       <Button
         component={Link}
-        to="/getmoreaddons"
+        to="/GetMoreAddons"
         className={(classes.AddonBtns, "menubar-btn")}
       >
         Get more addons

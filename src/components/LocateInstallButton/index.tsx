@@ -1,12 +1,12 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { useDispatch } from "react-redux";
 import { Button } from "@material-ui/core";
-import { lookupRootDir } from "../../../../redux/actions/dirDropdownActions";
+import { lookupRootDir } from "../../redux/actions/dirDropdownActions";
 const { dialog } = window.require("electron").remote;
 
-export default function UnableToLocateWoW() {
+export default function LocateInstallButton() {
   const dispatch = useDispatch();
-  
+
   const handleAddDir = async () => {
     var path = await dialog.showOpenDialog({
       properties: ["openDirectory"],
@@ -16,11 +16,8 @@ export default function UnableToLocateWoW() {
 
   return (
     <>
-      Unable to locate WoW installation please manually select your install
-      folder
-      <br />
       <Button onClick={handleAddDir} color="primary" size="small">
-        lookup
+        Locate WoW Folder
       </Button>
     </>
   );

@@ -60,20 +60,7 @@ const dropDownRender = (
         Searcing...
       </MenuItem>
     );
-  if (error)
-    return (
-      <MenuItem value={1}>
-        {error}
-        <Button
-          onClick={handleAddDir}
-          className={classes.lookup}
-          color="primary"
-          size="small"
-        >
-          lookup
-        </Button>
-      </MenuItem>
-    ); //error markup
+  if (error) return <MenuItem value={1}></MenuItem>; //error markup
 
   return dirList.map((rec: any, i) => {
     return (

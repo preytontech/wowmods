@@ -1,5 +1,5 @@
 import React from "react";
 
-export default function MyAccount() {
+export default function userAccount() {
   return <>My account</>;
 }

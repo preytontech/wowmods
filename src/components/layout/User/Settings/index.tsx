@@ -1,5 +1,5 @@
 import React from "react";
 
-export default function UserSettings() {
+export default function userSettings() {
   return <>User Settings</>;
 }
