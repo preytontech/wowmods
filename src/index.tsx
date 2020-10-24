@@ -10,6 +10,11 @@ import customTheme from "./materialThemes/customTheme";
 import "fontsource-roboto";
 import { CssBaseline } from "@material-ui/core";
 const store = configureStore();
+
+//here we will cache parts of state as it changes
+store.subscribe(() => {
+  console.log(store.getState());
+});
 ReactDOM.render(
   <>
     <CssBaseline />
