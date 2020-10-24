@@ -60,7 +60,7 @@ const dropDownRender = (
         Searcing...
       </MenuItem>
     );
-  if (error) return <MenuItem value={1}></MenuItem>; //error markup
+  if (error) return <MenuItem value={1}>{error}</MenuItem>; //error markup
 
   return dirList.map((rec: any, i) => {
     return (
