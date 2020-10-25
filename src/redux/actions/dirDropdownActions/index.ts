@@ -8,7 +8,7 @@ import {
   SET_SELECTED,
 } from "./constants";
 
-export const getDirInfo = (key: string) => {
+export const getPathFromRegistry = (key: string) => {
   return (dispatch: any) => {
     //TODO fetch from local cache if available
     dispatch({ type: SET_LOADING, payload: true });
@@ -48,6 +48,7 @@ export const getDirInfo = (key: string) => {
       });
   };
 };
+
 export const lookupRootDir = (path: string) => {
   path = path.split("\\").join("/");
   return (dispatch: any) => {
