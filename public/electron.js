@@ -1,16 +1,51 @@
 const path = require("path");
-
-const { app, BrowserWindow } = require("electron");
+const { app, BrowserWindow, Menu, nativeImage, Tray } = require("electron");
 const isDev = require("electron-is-dev");
 const { autoUpdater } = require("electron-updater");
+
+const isMac = process.platform === "darwin";
+const isWin = process.platform === "win32";
+
+let splash;
+let mainWindow;
+let tray;
 
 // Handle creating/removing shortcuts on Windows when installing/uninstalling
 if (require("electron-squirrel-startup")) {
   app.quit();
 }
 
-let splash;
-let mainWindow;
+function createTray() {
+  const icon = nativeImage
+    .createFromPath(path.join(__dirname, "logo192.png"))
+    .resize({ width: 16 });
+
+  tray = new Tray(icon);
+  const contextMenu = Menu.buildFromTemplate([
+    { label: app.name, type: "normal", icon: icon, enabled: false },
+    {
+      label: "Show",
+      click: () => {
+        mainWindow.show();
+
+        if (isMac) {
+          app.dock.show();
+        }
+      },
+    },
+    { role: "Quit" },
+  ]);
+
+  if (isWin) {
+    tray.on("click", () => {
+      mainWindow.show();
+    });
+  }
+
+  tray.setToolTip("WoWMods.app");
+  tray.setContextMenu(contextMenu);
+}
+
 require("@electron/remote/main").initialize();
 
 app.on("ready", () => {
@@ -38,6 +73,7 @@ app.on("ready", () => {
     enableRemoteModule: true,
   });
   splash.loadURL(`file://${__dirname}/splash.html`);
+  createTray();
 
   //Check for updates, download and install in BG for next launch
   autoUpdater.checkForUpdatesAndNotify();
@@ -61,6 +97,11 @@ app.on("ready", () => {
     splash.destroy();
     mainWindow.show();
   });
+
+  mainWindow.on("minimize", function (event) {
+    event.preventDefault();
+    mainWindow.hide();
+  });
 });
 
 // Quit when all windows are closed, except on macOS. There, it's common
@@ -71,35 +112,3 @@ app.on("window-all-closed", () => {
     app.quit();
   }
 });
-
-// function sendStatusToWindow(text) {
-//   log.info(text);
-//   win.webContents.send("message", text);
-// }
-// autoUpdater.on("checking-for-update", () => {
-//   sendStatusToWindow("Checking for update...");
-// });
-// autoUpdater.on("update-available", (info) => {
-//   sendStatusToWindow("Update available.");
-// });
-// autoUpdater.on("update-not-available", (info) => {
-//   sendStatusToWindow("Update not available.");
-// });
-// autoUpdater.on("error", (err) => {
-//   sendStatusToWindow("Error in auto-updater. " + err);
-// });
-// autoUpdater.on("download-progress", (progressObj) => {
-//   let log_message = "Download speed: " + progressObj.bytesPerSecond;
-//   log_message = log_message + " - Downloaded " + progressObj.percent + "%";
-//   log_message =
-//     log_message +
-//     " (" +
-//     progressObj.transferred +
-//     "/" +
-//     progressObj.total +
-//     ")";
-//   sendStatusToWindow(log_message);
-// });
-// autoUpdater.on("update-downloaded", (info) => {
-//   sendStatusToWindow("Update downloaded");
-// });
