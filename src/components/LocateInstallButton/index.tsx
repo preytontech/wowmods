@@ -11,7 +11,9 @@ export default function LocateInstallButton() {
     var path = await dialog.showOpenDialog({
       properties: ["openDirectory"],
     });
-    dispatch(lookupRootDir(path.filePaths[0].toString()));
+    if (path.filePaths.length > 0) {
+      dispatch(lookupRootDir(path.filePaths[0].toString()));
+    }
   };
 
   return (
