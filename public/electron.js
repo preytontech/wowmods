@@ -1,14 +1,30 @@
+const {
+  app,
+  BrowserWindow,
+  Menu,
+  nativeImage,
+  screen,
+  Tray,
+} = require("electron");
+const log = require("electron-log");
+const Store = require("electron-store");
 const path = require("path");
-const { app, BrowserWindow, Menu, nativeImage, Tray } = require("electron");
+const constants = require("../src/definitions/constants");
 const isDev = require("electron-is-dev");
 const { autoUpdater } = require("electron-updater");
-
 const isMac = process.platform === "darwin";
 const isWin = process.platform === "win32";
-
+const preferenceStore = new Store({
+  name: "preferences",
+  defaults: {
+    start_minimized: false,
+    collapse_to_tray: true,
+  },
+});
 let splash;
 let mainWindow;
 let tray;
+let appIsQuitting = false;
 
 // Handle creating/removing shortcuts on Windows when installing/uninstalling
 if (require("electron-squirrel-startup")) {
@@ -33,7 +49,7 @@ function createTray() {
         }
       },
     },
-    { role: "Quit" },
+    { role: "quit", label: "Quit" },
   ]);
 
   if (isWin) {
@@ -70,7 +86,9 @@ app.on("ready", () => {
     frame: false,
     alwaysOnTop: true,
     resizable: false,
-    enableRemoteModule: true,
+    webPreferences: {
+      enableRemoteModule: true,
+    },
   });
   splash.loadURL(`file://${__dirname}/splash.html`);
   createTray();
@@ -95,15 +113,40 @@ app.on("ready", () => {
       mainWindow.webContents.openDevTools({ mode: "detach" });
     }
     splash.destroy();
-    mainWindow.show();
+    if (
+      preferenceStore.get(constants.START_MINIMIZED_PREFERENCE_KEY) === false
+    ) {
+      mainWindow.show();
+    }
   });
 
   mainWindow.on("minimize", function (event) {
     event.preventDefault();
     mainWindow.hide();
   });
+
+  if (isMac) {
+    mainWindow.on("close", (e) => {
+      if (appIsQuitting) {
+        return;
+      }
+
+      e.preventDefault();
+      mainWindow.hide();
+
+      if (
+        preferenceStore.get(constants.COLLAPSE_TO_TRAY_PREFERENCE_KEY) ===
+        "true"
+      ) {
+        app.dock.hide();
+      }
+    });
+  }
 });
 
+app.on("before-quit", () => {
+  appIsQuitting = true;
+});
 // Quit when all windows are closed, except on macOS. There, it's common
 // for applications and their menu bar to stay active until the user quits
 // explicitly with Cmd + Q.

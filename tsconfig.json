@@ -18,5 +18,5 @@
     "noEmit": true,
     "jsx": "react"
   },
-  "include": ["src", "public/window-control.js"]
+  "include": ["src", "public/window-control.js", "public/electron.js"]
 }
