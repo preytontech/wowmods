@@ -1,5 +1,4 @@
 import {
-  Button,
   createStyles,
   FormControl,
   InputBase,
@@ -60,7 +59,7 @@ const dropDownRender = (
         Searcing...
       </MenuItem>
     );
-  if (error) return <MenuItem value={1}>{error}</MenuItem>; //error markup
+  if (error) return <MenuItem value={1}>Wow dir not found...</MenuItem>; //error markup
 
   return dirList.map((rec: any, i) => {
     return (
