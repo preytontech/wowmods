@@ -6,26 +6,27 @@ import {
   SET_SELECTED,
 } from "../actions/dirDropdownActions/constants";
 
-export interface WowDirState {
+export interface IWowDirState {
   wowRootDir: string;
   wowVerDirList: Array<string>;
   wowSelectedDir: string;
   loading: boolean;
   error: string;
+  
 }
 
-interface DirActions {
+interface IDirActions {
   type:
     | typeof GET_ROOTPATH
     | typeof GET_DIRPATHS
     | typeof SET_LOADING
     | typeof CATCH_ERROR
     | typeof SET_SELECTED;
-  payload: WowDirState;
+  payload: IWowDirState;
 }
 
 export const WowDirReducer = (
-  state: WowDirState = {
+  state: IWowDirState = {
     wowRootDir: "",
     wowVerDirList: [],
     wowSelectedDir: "1",
@@ -33,7 +34,7 @@ export const WowDirReducer = (
     error: "",
   },
 
-  { type, payload }: DirActions
+  { type, payload }: IDirActions
 ) => {
   switch (type) {
     case SET_LOADING:

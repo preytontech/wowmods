@@ -42,7 +42,7 @@ const useStyles = makeStyles((theme) => ({
     marginLeft: 50,
   },
 }));
-interface Props {
+interface IProps {
   loading: boolean;
   dirList: Array<object>;
   error: string;
@@ -51,7 +51,7 @@ interface Props {
   selectInput: string;
 }
 const dropDownRender = (
-  { loading, dirList, error, handleAddDir }: Props,
+  { loading, dirList, error, handleAddDir }: IProps,
   classes
 ) => {
   if (loading)

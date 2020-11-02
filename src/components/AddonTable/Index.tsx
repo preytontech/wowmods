@@ -2,7 +2,7 @@ import React from "react";
 import MaterialTable, { Column } from "material-table";
 import UpdateSourceSelector from "./UpdateSourceSelector";
 
-interface Row {
+interface IRow {
   name: string;
   status: string;
   addonVersion: string;
@@ -11,13 +11,13 @@ interface Row {
   updateSource: string;
 }
 
-interface TableState {
-  columns: Array<Column<Row>>;
-  data: Row[];
+interface ITableState {
+  columns: Array<Column<IRow>>;
+  data: IRow[];
 }
 
 export default function Mtable() {
-  const state: TableState = {
+  const state: ITableState = {
     columns: [
       { title: "Addon", field: "name" },
       { title: "Status", field: "status" },
