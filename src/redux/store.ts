@@ -25,7 +25,7 @@ const persistedState: IPersistedState = {
 };
 
 const configureStore = () => {
-  return createStore(rootReducer, persistedState, applyMiddleware(thunk));
+  return createStore(rootReducer, /* persistedState, */ applyMiddleware(thunk));
 };
 
 export default configureStore;
