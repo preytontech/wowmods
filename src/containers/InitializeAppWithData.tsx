@@ -1,14 +1,21 @@
-import React from "react";
-import { useSelector } from "react-redux";
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { Redirect } from "react-router-dom";
 import LocateInstallButton from "../components/LocateInstallButton";
+import { getPathFromRegistry } from "../redux/actions/dirDropdownActions";
 import { IWowDirState } from "../redux/reducers/dirReducer";
 
 type DirState = {
   WowDirReducer: IWowDirState;
 };
 
-function ManuallyLookupDir() {
+function InitializeAppWithData() {
+  const dispatch = useDispatch();
+  useEffect(() => {
+    const regPath =
+      "HKLM\\SOFTWARE\\WOW6432Node\\Blizzard Entertainment\\World of Warcraft";
+    dispatch(getPathFromRegistry(regPath));
+  }, []);
   const { loading, error } = useSelector((state: DirState) => ({
     ...state.WowDirReducer,
   }));
@@ -27,5 +34,4 @@ function ManuallyLookupDir() {
   }
   return <Redirect to="/MyAddons" />;
 }
-
-export default ManuallyLookupDir;
+export default InitializeAppWithData;

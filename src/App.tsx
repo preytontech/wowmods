@@ -12,7 +12,7 @@ import UnableToLocateWoW from "./components/layout/Errors/UnableToLocateWoW";
 import userAccount from "./components/layout/User/MyAccount";
 import userSettings from "./components/layout/User/Settings";
 import AboutWoWMods from "./components/layout/About";
-import ManuallyLookupDir from "./containers/ManuallyLookupDir";
+import InitializeAppWithData from "./containers/InitializeAppWithData";
 
 const useStyles = makeStyles({
   root: {
@@ -28,7 +28,7 @@ function App() {
       <Router basename={"/"}>
         <TopAppBar />
         <Switch>
-          <Route exact path="/" component={ManuallyLookupDir} />
+          <Route exact path="/" component={InitializeAppWithData} />
           <Route exact path="/MyAddons" component={MyAddons} />
           <Route exact path="/GetMoreAddons" component={GetMoreAddons} />
           <Route exact path="/userSettings" component={userSettings} />
