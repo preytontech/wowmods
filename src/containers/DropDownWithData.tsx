@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Redirect } from "react-router-dom";
+import { Redirect, RouteComponentProps, withRouter } from "react-router-dom";
 import DropDown from "../components/layout/TopAppBar/DropDown";
 import {
   getPathFromRegistry,
@@ -11,9 +11,11 @@ import { IWowDirState } from "../redux/reducers/dirReducer";
 type DirState = {
   WowDirReducer: IWowDirState;
 };
-const DropDownWithData = () => {
+type RouteProps = RouteComponentProps;
+const Drop = (Props: RouteProps) => {
   const dispatch = useDispatch();
   useEffect(() => {
+    Props.history.push("/");
     const regPath =
       "HKLM\\SOFTWARE\\WOW6432Node\\Blizzard Entertainment\\World of Warcraft";
     dispatch(getPathFromRegistry(regPath));
@@ -32,7 +34,6 @@ const DropDownWithData = () => {
 
   return (
     <>
-      <Redirect to="/" />
       <DropDown
         loading={loading}
         dirList={wowVerDirList}
@@ -43,5 +44,6 @@ const DropDownWithData = () => {
     </>
   );
 };
+const DropDownWithData = withRouter(Drop);
 
 export default DropDownWithData;

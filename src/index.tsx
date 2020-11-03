@@ -12,7 +12,7 @@ const store = configureStore();
 
 //here we will cache parts of state as it changes
 store.subscribe(() => {
-  console.log(store.getState());
+  //console.log(store.getState());
 });
 ReactDOM.render(
   <>
