@@ -55,6 +55,8 @@ const getExeVersion = (path: string) => {
   }
   return child;
 };
+
+
 const deleteFolderRecursive = async (path: string) => {
   rmdir(path, { recursive: true }, (err: string) => {
     if (err) {
