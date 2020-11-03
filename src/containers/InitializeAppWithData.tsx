@@ -8,7 +8,7 @@ type DirState = {
   WowDirReducer: IWowDirState;
 };
 
-function ManuallyLookupDir() {
+function InitializeAppWithData() {
   const { loading, error } = useSelector((state: DirState) => ({
     ...state.WowDirReducer,
   }));
@@ -28,4 +28,4 @@ function ManuallyLookupDir() {
   return <Redirect to="/MyAddons" />;
 }
 
-export default ManuallyLookupDir;
+export default InitializeAppWithData;
